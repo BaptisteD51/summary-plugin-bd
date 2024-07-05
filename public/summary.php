@@ -4,7 +4,7 @@ include_once 'header.php';
 
 class Summary
 {
-    private static $headers = [];
+    public static $headers = [];
 
     public static function collect_headers(string $content)
     {
@@ -74,12 +74,10 @@ class Summary
      */
     public static function append_summary($content)
     {
-        if (self::$headers != []) {
-            $position = strpos($content, self::$headers[0]->html);
-            $before = substr($content, 0, $position);
-            $after = substr($content, $position);
-            return $before . self::create_summary_markup() . $after;
-        }
+        $position = strpos($content, self::$headers[0]->html);
+        $before = substr($content, 0, $position);
+        $after = substr($content, $position);
+        return $before . self::create_summary_markup() . $after;
     }
 
     /**
@@ -93,12 +91,14 @@ class Summary
             if (is_singular('post') && in_the_loop() && is_main_query()) {
                 Summary::collect_headers($content);
 
-                $content = Summary::append_summary($content);
-                $content = Summary::replace_headers($content);
+                if (Summary::$headers != []) {
+                    $content = Summary::append_summary($content);
+                    $content = Summary::replace_headers($content);
+                }
             }
             return $content;
         }
 
-        add_filter( 'the_content', 'sumbd_the_content', 1 );
+        add_filter('the_content', 'sumbd_the_content', 1);
     }
 }
