@@ -1,4 +1,7 @@
 <?php
+
+include_once 'header.php';
+
 class Summary
 {
     private static $headers = [];

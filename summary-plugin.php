@@ -40,6 +40,5 @@ register_uninstall_hook(__FILE__,'sumbd_uninstall');
 // The plugin functionality in themselves
 
 include_once 'public/summary.php';
-include_once 'public/header.php';
 
 Summary::display();
