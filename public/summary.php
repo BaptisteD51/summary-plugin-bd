@@ -91,7 +91,9 @@ class Summary
     public static function sumbd_the_content($content)
     {
         // Checks if I'm on the post post type
-        if (is_singular('post') && in_the_loop() && is_main_query()) {
+        $post_types = self::get_selected_post_types();
+
+        if (is_singular($post_types) && in_the_loop() && is_main_query()) {
             self::collect_headers($content);
 
             if (self::$headers != []) {
@@ -100,5 +102,10 @@ class Summary
             }
         }
         return $content;
+    }
+
+    public static function get_selected_post_types(){
+        $post_types = get_option('display_on')['post_types'];
+        return $post_types;
     }
 }
