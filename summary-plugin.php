@@ -35,6 +35,7 @@ function sumbd_uninstall(){
 register_uninstall_hook(__FILE__,'sumbd_uninstall');
 
 //echo plugins_url( 'README.md', __FILE__ ); // Works a little bit like get_template_directory_uri in themes
+// plugin_dir_url(__FILE__) to get the directory
 
 
 // The plugin functionality in themselves

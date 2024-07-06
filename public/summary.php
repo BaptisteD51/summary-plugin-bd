@@ -85,20 +85,20 @@ class Summary
      */
     public static function display()
     {
-        function sumbd_the_content($content)
-        {
-            // Checks if I'm on the post post type
-            if (is_singular('post') && in_the_loop() && is_main_query()) {
-                Summary::collect_headers($content);
+        add_filter('the_content', [self::class,'sumbd_the_content'], 1); // You need to use this syntax to add a class method to a hook
+    }
 
-                if (Summary::$headers != []) {
-                    $content = Summary::append_summary($content);
-                    $content = Summary::replace_headers($content);
-                }
+    public static function sumbd_the_content($content)
+    {
+        // Checks if I'm on the post post type
+        if (is_singular('post') && in_the_loop() && is_main_query()) {
+            self::collect_headers($content);
+
+            if (self::$headers != []) {
+                $content = self::append_summary($content);
+                $content = self::replace_headers($content);
             }
-            return $content;
         }
-
-        add_filter('the_content', 'sumbd_the_content', 1);
+        return $content;
     }
 }
