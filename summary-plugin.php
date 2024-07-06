@@ -37,9 +37,15 @@ register_uninstall_hook(__FILE__,'sumbd_uninstall');
 //echo plugins_url( 'README.md', __FILE__ ); // Works a little bit like get_template_directory_uri in themes
 // plugin_dir_url(__FILE__) to get the directory
 
+// The plugin Settings and options
+require_once 'admin/sumbdsettings.php';
 
-// The plugin functionality in themselves
+Sumbdsettings::add_setting_page();
+
+// The plugin functionalities in themselves
 
 include_once 'public/summary.php';
 
 Summary::display();
+
+// var_dump(get_post_types(['public'   => true,])); get all the posts types that are public. Should be used after init hook.
