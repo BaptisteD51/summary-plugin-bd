@@ -14,6 +14,9 @@ require_once 'public/sumbdview.php';
  * Triggers on plugin activation
  */
 function sumbd_activate(){
+    if(!get_option(Sumbdsettings::OPTION_NAME_1)){
+        add_option(Sumbdsettings::OPTION_NAME_1, ['post',]);
+    }
 }
 
 register_activation_hook(__FILE__,'sumbd_activate');
