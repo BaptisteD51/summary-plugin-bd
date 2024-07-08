@@ -32,7 +32,7 @@ register_deactivation_hook(__FILE__,'sumbd_deactivate');
  * Triggers on plugin uninstall (it is also possible to do it with an uninstall.php file)
  */
 function sumbd_uninstall(){
-    delete_option(Sumbdsettings::OPTION_NAME);
+    delete_option(Sumbdsettings::OPTION_NAME_1);
 }
 
 register_uninstall_hook(__FILE__,'sumbd_uninstall');
@@ -42,10 +42,9 @@ register_uninstall_hook(__FILE__,'sumbd_uninstall');
 
 // The plugin Settings and options
 
-Sumbdsettings::add_setting_page();
+Sumbdsettings::register();
 
 // The plugin functionalities in themselves
-
 
 Summary::display();
 

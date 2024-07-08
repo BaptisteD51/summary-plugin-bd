@@ -105,7 +105,7 @@ class Summary
     }
 
     public static function get_selected_post_types(){
-        $post_types = get_option('display_on')['post_types'];
+        $post_types = get_option('sumbd_display_on');
         return $post_types;
     }
 }
