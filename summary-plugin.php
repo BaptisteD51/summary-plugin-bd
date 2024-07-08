@@ -7,6 +7,9 @@
  * Author URI: https://baptistedufour.fr/
  */
 
+require_once 'admin/sumbdsettings.php';
+require_once 'public/summary.php';
+
 /**
  * Triggers on plugin activation
  */
@@ -38,13 +41,11 @@ register_uninstall_hook(__FILE__,'sumbd_uninstall');
 // plugin_dir_url(__FILE__) to get the directory
 
 // The plugin Settings and options
-require_once 'admin/sumbdsettings.php';
 
 Sumbdsettings::add_setting_page();
 
 // The plugin functionalities in themselves
 
-include_once 'public/summary.php';
 
 Summary::display();
 
