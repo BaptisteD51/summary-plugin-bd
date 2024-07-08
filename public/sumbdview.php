@@ -1,8 +1,8 @@
 <?php
 
-include_once 'header.php';
+include_once 'sumbdheader.php';
 
-class Summary
+class Sumbdview
 {
     public static $headers = [];
 
@@ -12,7 +12,7 @@ class Summary
         $results = preg_match_all($regex, $content, $matches);
 
         for ($i = 0; $i < count($matches[0]); $i++) {
-            self::$headers[] = new Header(intval($matches[1][$i]), $matches[3][$i], $matches[0][$i], trim($matches[2][$i]));
+            self::$headers[] = new Sumbdheader(intval($matches[1][$i]), $matches[3][$i], $matches[0][$i], trim($matches[2][$i]));
         }
     }
 

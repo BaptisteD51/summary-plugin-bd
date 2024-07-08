@@ -1,20 +1,19 @@
 <?php
 /**
- * Plugin Name: sumbd Plugin
- * Description: Adds a sumbd at the top of your articles to easily navigate to your headers
+ * Plugin Name: Bd's Summary Plugin 
+ * Description: Adds a summary at the top of your post, pages or custom post types, to easily navigate to your headers
  * Version: 1.0
  * Author: Baptiste Dufour
  * Author URI: https://baptistedufour.fr/
  */
 
 require_once 'admin/sumbdsettings.php';
-require_once 'public/summary.php';
+require_once 'public/sumbdview.php';
 
 /**
  * Triggers on plugin activation
  */
 function sumbd_activate(){
-    return;
 }
 
 register_activation_hook(__FILE__,'sumbd_activate');
@@ -23,7 +22,6 @@ register_activation_hook(__FILE__,'sumbd_activate');
  * Triggers on plugin deactivation
  */
 function sumbd_deactivate(){
-    return;
 }
 
 register_deactivation_hook(__FILE__,'sumbd_deactivate');
@@ -46,6 +44,4 @@ Sumbdsettings::register();
 
 // The plugin functionalities in themselves
 
-Summary::display();
-
-// var_dump(get_post_types(['public'   => true,])); get all the posts types that are public. Should be used after init hook.
+Sumbdview::display();

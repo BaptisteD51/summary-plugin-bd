@@ -1,5 +1,5 @@
 <?php
-class Header{
+class Sumbdheader{
     public $level;
     public $content;
     public $html;
