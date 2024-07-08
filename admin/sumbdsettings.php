@@ -45,27 +45,38 @@ class Sumbdsettings{
             },
             self::OPTION_NAME,
         );
+
         add_settings_field(
             'sumbd_post_types',
             'Post types:',
             function(){
                 $options = get_option('display_on');
-                $field = isset( $options['post_types'] ) ? (array) $options['post_types'] : []; // le (array) force la conversion en tableau
+                $checkedfields = isset( $options['post_types'] ) ? (array) $options['post_types'] : []; // le (array) force la conversion en tableau
+
+                foreach(self::get_post_types() as $post_type):
                 ?>
                 <p>
-                    <label for="post">Post</label>
-                    <input type="checkbox" name="display_on[post_types][]" id="post" value="post" <?php checked( in_array('post', $field), 1)?>>
-                </p>
-                <p>
-                    <label for="page">Page</label>
-                    <input type="checkbox" name="display_on[post_types][]" id="page" value="page" <?php checked( in_array('page', $field), 1)?>>
+                    <label for="<?php echo $post_type; ?>"><?php echo $post_type; ?></label>
+                    <input type="checkbox" name="display_on[post_types][]" id="<?php echo $post_type; ?>" value="<?php echo $post_type; ?>" <?php checked( in_array($post_type, $checkedfields), 1)?>>
                 </p>
                 
                 <?php
+                endforeach;
             },
             self::OPTION_NAME,
             'sumbd_option_section' //settings section to link with
         );
-    }
 
+    }
+    
+    public static function get_post_types(){
+        $allPostTypes = get_post_types(['public'   => true,]);
+        
+        // the attachment post type isn't relevant for a summary
+        $allPostTypes = array_filter($allPostTypes, function($postType){
+            return $postType != "attachment";
+        });
+
+        return $allPostTypes;
+    }
 }
