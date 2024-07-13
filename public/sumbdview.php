@@ -5,6 +5,7 @@ include_once 'sumbdheader.php';
 class Sumbdview
 {
     public static $headers = [];
+    public static $max_level;
 
     public static function collect_headers(string $content)
     {
@@ -18,6 +19,7 @@ class Sumbdview
 
     private static function create_summary_markup()
     {
+        self::filter_headers_level();        
         $headers = self::$headers;
 
         if (count($headers) == 0) {
@@ -107,5 +109,19 @@ class Sumbdview
     public static function get_selected_post_types(){
         $post_types = get_option('sumbd_display_on');
         return $post_types;
+    }
+
+    /**
+     * Filters the headers so that they correspond to the max_level option registered by the user
+     */
+    public static function filter_headers_level(){
+        self::$max_level = intval(get_option(Sumbdsettings::OPTION_NAME_2));
+        $filtered_headers = [];
+        for($i = 0; $i<count(self::$headers); $i++){
+            if(self::$headers[$i]->level <= self::$max_level){
+                $filtered_headers[] = self::$headers[$i];
+            }
+        }
+        self::$headers = $filtered_headers;
     }
 }
