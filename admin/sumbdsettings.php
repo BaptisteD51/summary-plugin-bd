@@ -36,6 +36,7 @@ class Sumbdsettings{
         </form>
 
         <?php
+        var_dump(get_option('sumbd_styling'));
     }
 
     public static function register_settings(){
@@ -107,7 +108,7 @@ class Sumbdsettings{
         register_setting(self::OPTION_GROUP, self::OPTION_NAME_3);
         add_settings_section(
             'sumbd_styling_section', 
-            'Customize appearance.',
+            'Customize appearance',
             function(){
                 echo 'You can customize the appearance of your summary:';
             },
@@ -115,11 +116,13 @@ class Sumbdsettings{
         );
 
         add_settings_field(
-            'sumbd_styling_background_color',
-            'Background color:',
+            'sumbd_styling_customize',
+            'Customize appearance (uncheck id you want to add your own CSS):',
             function(){
+                $customize = get_option(self::OPTION_NAME_3)['customize'];
                 ?>
-                    <input type="color" name="sumbd_styling[color]">
+                    <input type="hidden" name="sumbd_styling[customize]">
+                    <input type="checkbox" name="sumbd_styling[customize]" <?php checked($customize,true);?>>
                 <?php
             },
             self::OPTION_GROUP,
@@ -127,11 +130,78 @@ class Sumbdsettings{
         );
 
         add_settings_field(
-            'sumbd_styling_color',
+            'sumbd_styling_background_color',
+            'Background color:',
+            function(){
+                $background_color = get_option(self::OPTION_NAME_3)['background_color'];
+                ?>
+                    <input class="sumbd-customize-setting" type="color" name="sumbd_styling[background_color]" value="<?php echo $background_color; ?>">
+                <?php
+            },
+            self::OPTION_GROUP,
+            'sumbd_styling_section',
+        );
+
+        add_settings_field(
+            'sumbd_styling_text_color',
             'Text color:',
             function(){
+                $text_color = get_option(self::OPTION_NAME_3)['text_color'];
                 ?>
-                    <input type="color" name="sumbd_styling[color]">
+                    <input class="sumbd-customize-setting" type="color" name="sumbd_styling[text_color]" value="<?php echo $text_color; ?>">
+                <?php
+            },
+            self::OPTION_GROUP,
+            'sumbd_styling_section',
+        );
+
+        add_settings_field(
+            'sumbd_styling_border_width',
+            'Border width:',
+            function(){
+                $border_width = get_option(self::OPTION_NAME_3)['border_width'];
+                ?>
+                    <input class="sumbd-customize-setting" type="range" name="sumbd_styling[border_width]" min="0" max ="10" value="<?php echo $border_width; ?>">
+                <?php
+            },
+            self::OPTION_GROUP,
+            'sumbd_styling_section',
+        );
+
+        add_settings_field(
+            'sumbd_styling_border_radius',
+            'Border radius:',
+            function(){
+                $border_width = get_option(self::OPTION_NAME_3)['border_radius'];
+                ?>
+                    <input class="sumbd-customize-setting" type="range" name="sumbd_styling[border_radius]" min="0" max ="25" value="<?php echo $border_width;?>">
+                <?php
+            },
+            self::OPTION_GROUP,
+            'sumbd_styling_section',
+        );
+
+        add_settings_field(
+            'sumbd_styling_border_color',
+            'Border color:',
+            function(){
+                $border_color = get_option(self::OPTION_NAME_3)['border_color'];
+                ?>
+                    <input class="sumbd-customize-setting" type="color" name="sumbd_styling[border_color]" value="<?php echo $border_color; ?>">
+                <?php
+            },
+            self::OPTION_GROUP,
+            'sumbd_styling_section',
+        );
+
+        add_settings_field(
+            'sumbd_styling_center',
+            'Center summary:',
+            function(){
+                $center = get_option(self::OPTION_NAME_3)['center'];
+                ?>
+                    <input type="hidden" name="sumbd_styling[center]" value="0">
+                    <label for="center_summary">Center </label><input class="sumbd-customize-setting" type="checkbox" name="sumbd_styling[center]" value="1" id="center_summary" <?php checked($center,true);?>>
                 <?php
             },
             self::OPTION_GROUP,

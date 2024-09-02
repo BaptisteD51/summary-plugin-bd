@@ -17,6 +17,23 @@ function sumbd_activate(){
     if(!get_option(Sumbdsettings::OPTION_NAME_1)){
         add_option(Sumbdsettings::OPTION_NAME_1, ['post',]);
     }
+
+    if(!get_option(Sumbdsettings::OPTION_NAME_2)){
+        add_option(Sumbdsettings::OPTION_NAME_2, 6);
+    }
+
+    if(!get_option(Sumbdsettings::OPTION_NAME_3)){
+        $default_styling = [
+            'customize'=>'0',
+            'background_color' => '',
+            'text_color' => '',
+            'border_width' => '0',
+            'border_radius' => '0',
+            'border_color' => '',
+            'center' => '0',
+        ];
+        add_option(Sumbdsettings::OPTION_NAME_3,$default_styling);
+    }
 }
 
 register_activation_hook(__FILE__,'sumbd_activate');
