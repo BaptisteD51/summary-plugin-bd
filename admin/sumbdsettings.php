@@ -36,7 +36,7 @@ class Sumbdsettings{
         </form>
 
         <?php
-        var_dump(get_option('sumbd_styling'));
+        var_dump(get_option(Sumbdsettings::OPTION_NAME_3));
     }
 
     public static function register_settings(){
@@ -121,8 +121,8 @@ class Sumbdsettings{
             function(){
                 $customize = get_option(self::OPTION_NAME_3)['customize'];
                 ?>
-                    <input type="hidden" name="sumbd_styling[customize]">
-                    <input type="checkbox" name="sumbd_styling[customize]" <?php checked($customize,true);?>>
+                    <input type="hidden" name="sumbd_styling[customize]" value="0">
+                    <input id="sumbd-customize-checkbox" type="checkbox" name="sumbd_styling[customize]" value="1" <?php checked($customize,true);?>>
                 <?php
             },
             self::OPTION_GROUP,

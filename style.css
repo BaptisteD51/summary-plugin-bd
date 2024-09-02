@@ -1,0 +1,7 @@
+tr:has(input[disabled]) th, tr:has(input[disabled]) label{
+    color:lightgray;
+}
+
+tr:has(input[disabled]) input{
+    filter: saturate(75%);
+}

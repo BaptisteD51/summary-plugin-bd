@@ -23,13 +23,14 @@ function sumbd_activate(){
     }
 
     if(!get_option(Sumbdsettings::OPTION_NAME_3)){
+        
         $default_styling = [
             'customize'=>'0',
-            'background_color' => '',
-            'text_color' => '',
+            'background_color' => '#FFFFFF',
+            'text_color' => '#000000',
             'border_width' => '0',
             'border_radius' => '0',
-            'border_color' => '',
+            'border_color' => '#000000',
             'center' => '0',
         ];
         add_option(Sumbdsettings::OPTION_NAME_3,$default_styling);
@@ -65,3 +66,18 @@ Sumbdsettings::register();
 // The plugin functionalities in themselves
 
 Sumbdview::display();
+
+
+
+// test add script and style page
+
+
+
+function sumbd_add_backend_script($hook_suffix){
+    if($hook_suffix == "settings_page_sumbd_options"){
+        wp_enqueue_script("script",plugin_dir_url(__FILE__)."/script.js");
+        wp_enqueue_style("style",plugin_dir_url(__FILE__)."/style.css");
+    }
+}
+
+add_action("admin_enqueue_scripts","sumbd_add_backend_script");
